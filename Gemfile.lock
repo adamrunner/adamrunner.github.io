@@ -133,7 +133,6 @@ PLATFORMS
 DEPENDENCIES
   execjs
   github-pages
-  redcarpet
   therubyracer
 
 BUNDLED WITH

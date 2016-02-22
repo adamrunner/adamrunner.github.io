@@ -68,8 +68,8 @@ url-pretty: "adamrunner.com"
 
 # Output options (more information on Jekyll's site)
 timezone: "America/Vancouver"
-markdown: redcarpet
-highlighter: pygments
+markdown: kramdown
+highlighter: coderay
 permalink: /:year-:month-:day-:title
 paginate: 5
 
