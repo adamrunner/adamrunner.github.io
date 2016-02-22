@@ -27,7 +27,7 @@ description: Some musings about the internet.
 
 # List of links in the navigation bar
 navbar-links:
-  Home: ""
+  Home: "/"
   About Me: "aboutme.html"
 
 # --- Footer options --- #
@@ -38,7 +38,7 @@ author:
   name: Adam Runner
   email: "adamrunner@gmail.com"
   github: adamrunner
-  twitter: adamrunner
+  twitter: adamrunner1
   linkedin: "adam-runner-7766875a"
   stackoverflow: "1572514/arun32"
 
@@ -68,7 +68,7 @@ url-pretty: "adamrunner.com"
 
 # Output options (more information on Jekyll's site)
 timezone: "America/Vancouver"
-markdown: kramdown
+markdown: redcarpet
 highlighter: pygments
 permalink: /:year-:month-:day-:title
 paginate: 5
