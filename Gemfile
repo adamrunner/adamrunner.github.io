@@ -2,4 +2,4 @@ source 'https://rubygems.org'
 
 gem 'execjs'
 gem 'therubyracer'
-gem 'github-pages'
+gem 'github-pages', :branch => 'master', :git => 'git://github.com/github/pages-gem'
