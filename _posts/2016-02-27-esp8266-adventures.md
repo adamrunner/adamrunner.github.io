@@ -24,7 +24,7 @@ Recently, the Arduino IDE has started supporting the ESP8266 boards. This allows
 
 ![Picture of DS18B20](/img/ds18b20.jpg)
 
-For this project I was going to integrate a DS18S20 - a OneWire Temperature sensor, with the ESP8266 and have it report the temperature to an endpoint at a configurable interval. The endpoint should be an arbitrary web endpoint - something similar to [ThingSpeak](https://thingspeak.com/) or [data.sparkfun.com](https://data.sparkfun.com) (aka Phant).
+For this project I was going to integrate a DS18S20 - a OneWire Temperature sensor, with the ESP8266 and have it report the temperature to an endpoint at a configurable interval. The endpoint should be an arbitrary web endpoint - something similar to [ThingSpeak](https://thingspeak.com/) or [data.sparkfun.com](https://data.sparkfun.com) (which is a hosted version of their open source software [Phant](http://phant.io)).
 
 ### Putting it all together
 ![Breadboard with all the components](/img/esp-temp-data-breadboard.jpg)

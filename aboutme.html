@@ -7,7 +7,18 @@ subtitle:
 
 <!-- <p>I'm also a motorcycle enthusiast and avid rider - well I was until May 2015 when I was involved in a serious accident. I haven't gotten back on a bike since, but I probably will. But please! Watch out for motorcycles, and motorcyclists: wear your gear! It'll save your life!</p> -->
 <p>This is a line graph of the temperature in my apartment in Portland, OR. The data comes from a DS18S20 temperature sensor and is sent to the internet via a ESP8266 (ESP-01) microcontroller / wifi device. The raw data is stored on <a href="https://data.sparkfun.com/output/ZGRYvQ5b3gHl5rwqbKoj">data.sparkfun.com</a> it sends a request to their server every 10 minutes with the current temperature in degrees fahrenheit.</p>
+<p>You can read about the build in this <a href="/2016-02-27-esp8266-adventures">blog post here.</a>
 <p>The line graph is drawn by gathering the data from the SparkFun JSON API, and feeding it to Google's JavaScript Charting library.</p>
+<div id="chart" style="width: 100%; min-height:400px;">
+  <div class='loader'>
+    <i class="fa fa-spin fa-refresh fa-4x"></i>
+  </div>
+</div>
+<hr class="small">
+<br>
+<em>The little ESP8266 temperature logger, sitting quietly on it's shelf</em>
+<img src="/img/esp8266-temp-logger.jpg" class="center-block" alt="My faithful little temp logger sitting on it's shelf" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://www.google.com/jsapi"></script>
 <script>
@@ -18,6 +29,7 @@ subtitle:
     var public_key = 'ZGRYvQ5b3gHl5rwqbKoj';
 
     // JSONP request
+    //TODO: Abstract this so it automatically refreshes the chart - setInterval or something similar
     var jsonData = $.ajax({
       url: 'https://data.sparkfun.com/output/' + public_key + '.json',
       data: {page: 1},
@@ -37,10 +49,15 @@ subtitle:
       });
 
       var chart = new google.visualization.LineChart($('#chart').get(0));
+      var options = {
+          title: 'Apartment temperature over time',
+          legend:{position: 'top'},
+          axisTitlesPosition: 'in',
+          animation: {startup : true, duration: 500},
+          chartArea:{left:"5%",top:"10%",width:'95%',height:'75%'}
+        }
 
-      chart.draw(data, {
-        title: 'Apartment Temperature'
-      });
+      chart.draw(data, options);
 
     });
 
@@ -55,5 +72,3 @@ subtitle:
   google.setOnLoadCallback(drawChart);
 
 </script>
-
-<div id="chart" style="width: 100%;"></div>

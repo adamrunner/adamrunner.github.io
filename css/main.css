@@ -1,5 +1,4 @@
 @import url("pygment_highlights.css");
-
 /* --- General --- */
 
 body {
@@ -39,7 +38,14 @@ hr.small {
   border-color: inherit;
   border-radius: 3px;
 }
-
+.loader {
+  max-width: 750px;
+  width:100%;
+  padding:200px 0;
+  text-align: center;
+}
+.loader i {
+}
 .main-content {
   padding-top: 80px;
 }
@@ -48,7 +54,10 @@ hr.small {
     padding-top: 130px;
   }
 }
-
+img.center-block {
+  display: block;
+  margin: 0 auto;
+}
 .main-explain-area {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 15px inherit;
