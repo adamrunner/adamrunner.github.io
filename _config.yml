@@ -62,7 +62,7 @@ url-pretty: "adamrunner.com"
 disqus: "adamrunner"
 
 # Fill in your Google Analytics ID to track your website using GA
-#google_analytics: ""
+google_analytics: "UA-70855829-1"
 
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
