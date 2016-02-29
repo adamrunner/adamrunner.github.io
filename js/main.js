@@ -16,5 +16,8 @@ $('#main-navbar').on('show.bs.collapse', function () {
 $('#main-navbar').on('hidden.bs.collapse', function () {
   $(".navbar").removeClass("top-nav-expanded");
 })
-
+// External Links - should be opened in _blank
+$(document.links).filter(function() {
+    return this.hostname != window.location.hostname;
+}).attr('target', '_blank');
 // 2fc73a3a967e97599c9763d05e564189

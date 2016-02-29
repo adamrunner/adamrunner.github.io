@@ -38,14 +38,19 @@ hr.small {
   border-color: inherit;
   border-radius: 3px;
 }
+@media only screen and (max-width: 550px){
+  .avatar-img {
+    display: none !important;
+  }
+}
+
 .loader {
   max-width: 750px;
   width:100%;
   padding:200px 0;
   text-align: center;
 }
-.loader i {
-}
+
 .main-content {
   padding-top: 80px;
 }

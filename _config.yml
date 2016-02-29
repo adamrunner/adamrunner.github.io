@@ -7,17 +7,11 @@
 url: "http://adamrunner.com"
 baseurl: ""
 
-# If you are building a GitHub project page then use these settings:
-#url: "http://username.github.io/projectname"
-#baseurl: "/projectname"
-
-# Of course don't forget to change the username and projectname to YOUR username and project
-
 # Name of website
-title: A blog about software development
+title: Building Internet Things
 
 # Short description of your site
-description: Some musings about the internet.
+description: I build things for the internet, usally software. Sometimes I play with hardware and components too.
 gems: [jekyll-paginate]
 # --- Navigation bar options --- #
 
@@ -36,7 +30,6 @@ navbar-links:
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Adam Runner
-  email: "adamrunner@gmail.com"
   github: adamrunner
   twitter: adamrunner1
   linkedin: "adam-runner-7766875a"
@@ -44,7 +37,7 @@ author:
 
 # Select which links to show in the footer
 footer-links-active:
-  rss: false
+  rss: true
   facebook: false
   email: false
   twitter: true
