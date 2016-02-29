@@ -2,6 +2,7 @@
 layout: post
 title: Adventures in programming the ESP8266
 ---
+*Follow Up: <a href="/aboutme#graph">Here's the data</a> that I've been collecting with this project*
 <img src="/img/esp8266-01.jpg" class="center-block img-thumbnail" alt="ESP8266 / ESP-01 the original">
 
 The ESP8266 has been out for a little over a year now, and even when it was first released it was making waves. [$4-$5 USD cost](http://ebay.to/1Sb3Gv1), Wireless 802.11b/g/n, microprocessor with GPIOs and analog inputs, oh my! I was an early-ish adopter of the ESP8266 - though it always confused me exactly *what* I was going to do with it.

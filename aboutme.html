@@ -7,7 +7,7 @@ subtitle:
 
 <!-- <p>I'm also a motorcycle enthusiast and avid rider - well I was until May 2015 when I was involved in a serious accident. I haven't gotten back on a bike since, but I probably will. But please! Watch out for motorcycles, and motorcyclists: wear your gear! It'll save your life!</p> -->
 <p>This is a line graph of the temperature in my apartment in Portland, OR. The data comes from a DS18S20 temperature sensor and is sent to the internet via a ESP8266 (ESP-01) microcontroller / wifi device. The raw data is stored on <a href="https://data.sparkfun.com/output/ZGRYvQ5b3gHl5rwqbKoj">data.sparkfun.com</a> it sends a request to their server every 10 minutes with the current temperature in degrees fahrenheit.</p>
-<p>You can read about the build in this <a href="/2016-02-27-esp8266-adventures">blog post here.</a>
+<p id="graph">You can read about the build in this <a href="/2016-02-27-esp8266-adventures">blog post here.</a>
 <p>The line graph is drawn by gathering the data from the SparkFun JSON API, and feeding it to Google's JavaScript Charting library.</p>
 <div id="chart" style="width: 100%; min-height:400px;">
   <div class='loader'>
