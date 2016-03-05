@@ -18,18 +18,20 @@ subtitle:
 <br>
 <em>The little ESP8266 temperature logger, sitting quietly on it's shelf</em>
 <img src="/img/esp8266-temp-logger.jpg" class="center-block" alt="My faithful little temp logger sitting on it's shelf" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://www.google.com/jsapi"></script>
+<script src="/js/moment.min.js"></script>
 <script>
 
   // onload callback
   function drawChart() {
 
     var public_key = 'ZGRYvQ5b3gHl5rwqbKoj';
-
+    var yesterday = moment().subtract(1, 'days').format()
     // JSONP request
     //TODO: Abstract this so it automatically refreshes the chart - setInterval or something similar
+    //TODO: Add Controls for date range
+    //https://data.sparkfun.com/output/ZGRYvQ5b3gHl5rwqbKoj.json?gte[timestamp]=11-30-2014&gte[temp]=100.0
+    // https://data.sparkfun.com/output/ZGRYvQ5b3gHl5rwqbKoj.json
     var jsonData = $.ajax({
       url: 'https://data.sparkfun.com/output/' + public_key + '.json',
       data: {page: 1},
@@ -39,12 +41,14 @@ subtitle:
       var data = new google.visualization.DataTable();
 
       data.addColumn('datetime', 'Time');
-      data.addColumn('number', 'Degrees F');
+      data.addColumn('number', 'Indoor °F');
+      data.addColumn('number', 'Outdoor °F');
 
       $.each(results, function (i, row) {
         data.addRow([
           (new Date(row.timestamp)),
-          parseFloat(row.degrees_f)
+          parseFloat(row.indoor_temp),
+          parseFloat(row.outside_temp)
         ]);
       });
 
