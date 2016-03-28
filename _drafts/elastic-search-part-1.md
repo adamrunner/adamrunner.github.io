@@ -7,7 +7,9 @@ This is going to be the first part in a multi-part series about ElasticSearch, I
 
 ### Installing ElasticSearch
 
-Naturally, we're going to have to install ElasticSearch if we want to use it, there are plenty of guides that tell you how to do this; but they all seemed a bit older. I'm going to be using a DigitalOcean droplet to run ElasticSearch on, but you can run it on whatever you want. An old desktop that's been refurbished into a "server" would work fine. You could also use a Vagrant instance to host it, or another type of Virtual Machine. The main reason that I'm using DigitalOcean is that I want my ElasticSearch instance to be accessible from the internet.
+Naturally, we're going to have to install ElasticSearch if we want to use it, there are plenty of guides that tell you how to do this; but they all seemed a bit older. I'm going to be using a [DigitalOcean droplet](https://m.do.co/c/b508d27b35f8) to run ElasticSearch on, but you can run it on whatever you want.
+
+An old desktop that's been refurbished into a "server" would work fine. You could also use a Vagrant instance to host it, or another type of Virtual Machine. The main reason that I'm using DigitalOcean is that I want my ElasticSearch instance to be accessible from the internet.
 
 Why DigitalOcean?
 
@@ -33,7 +35,7 @@ Choosing a datacenter region. You'll want to choose whichever location is closes
 
 <img src="/img/digital_ocean_step3.png" class="center-block img-thumbnail" alt="Choose the location closet to you, for me that's SFO">
 
-Just a couple of other things. The final couple of steps you'll want to select IPv6 and enable it (I suppose you don't _have_ to but it seems silly not to.) and you'll also want to import your SSH key! This part is very important! You shouldn't use password authentication for SSH, pretty much ever. SSH Keys are much more secure and much easier to deal with. I mean who likes passwords anyways?
+Just a couple of other things. The final couple of steps you'll want to select IPv6 and enable it (I suppose you don't _have_ to but it seems silly not to) and you'll also want to import your SSH key! This part is very important! **You shouldn't use password authentication for SSH, pretty much ever.** SSH Keys are much more secure and much easier to deal with. I mean who likes passwords anyways?
 
 <img src="/img/digital_ocean_step4.png" class="center-block img-thumbnail" alt="Please use SSH keys for login! No one likes passwords!">
 
