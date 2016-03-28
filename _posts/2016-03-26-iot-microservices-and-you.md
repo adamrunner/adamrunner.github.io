@@ -3,7 +3,7 @@ layout: post
 title: Micro-service based architecture in IoT land.
 ---
 
-In the [last post](/2016-02-27-esp8266-adventures) I made, we set up and ESP8266 to log the temperature in my apartment to the internet. One disadvantage that this has is that it's difficult to change any of the functionality that is programmed into the chip. For example: where you're sending the data, wanting to collect additional data, adding new sensors, etc. It was also difficult to retrieve the data on an ad-hoc basis, since I had to wait for the next interval to pass before the ESP8266 sent new data out from my sensors. I decided that it would be best to switch architectures at this point, and move to something a bit more modular.
+In the [last post](/2016-02-27-esp8266-adventures) I made, we set up and ESP8266 to log the temperature in my apartment to the internet. One disadvantage that this has is that it's difficult to change any of the functionality that is programmed into the chip. For example: where you're sending the data, wanting to collect additional data, adding new sensors, etc. It was also difficult to retrieve the data on an ad-hoc basis, since I had to wait for the next interval to pass before the ESP8266 sent new data out from my sensors. I decided that it would be best to switch architectures at this point, and move to a system that was more modular.
 
 These quotes about Unix seem to embody exactly what I was thinking about in solving this problem.
 
@@ -15,9 +15,11 @@ These quotes about Unix seem to embody exactly what I was thinking about in solv
 
 ### Planning/Design
 
-In thinking down that road, I realized that I was muddling the concerns in the sensor at that point. It was responsible for gathering the data, *and* sending the data out to be stored elsewhere. I wanted to introduce more functionality, and gather the outside temperature also, and the waters got muddied further with the fact that I wanted to rely on an already existing API to gather the outdoor temperature information.
+In thinking down that road, I realized that I was muddling the concerns in the sensor module at that point. It was responsible for gathering the data, *and* sending the data out to be stored elsewhere. I was hitting a roadblock with wanting to introduce even more functionality by gathering outside temperature data from a web service. 
 
-I wanted to use [Forecast.IO](https://developer.forecast.io/) for gathering the outdoor temperature; because why would I need to re-invent that wheel. Also by using an external weather source I can assume that the data is _reasonably_ accurate, and is isolated from adverse environmental affects. Whereas if I was attempting to do this on my own, there could be other factors (gathering temperature too close to the house, or in direct sunlight, etc) that could affect my readings.
+I realized this small sensor module should just have one single responsibility, gathering the indoor temperature of my apartment. Other data points should come from other nodes, sensors, or even external services.
+
+I wanted to use [Forecast.IO](https://developer.forecast.io/) for gathering the outdoor temperature; because re-inventing the wheel of gathering the outdoor temperature seemed silly. Also by using an external weather source I can assume that the data is _reasonably_ accurate, and is isolated from adverse environmental affects. Whereas if I was attempting to do this on my own, there could be other factors (gathering temperature too close to the house, or in direct sunlight, etc) that could affect my readings.
 
 Forecast.IO exposed a simple JSON API, and was free up to 1000 calls / day. It definitely seemed to fit the bill for this project.
 
@@ -29,21 +31,23 @@ After thinking through this problem I was quite satisfied, using an architecture
 
 1. [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns)
 1. Not reinventing the wheel
-1. Modular and able to be expanded on later
+1. Modular and able to be expanded on later (additional sensors, output methods, etc.)
 
 ### Implementation
 
 There were several things to consider on the implementation side
 
 1. Crafting a clean API / interface that would allow me to gather data from the sensors on a scheduled interval
-1. Aggregation of the inside temperature data and the outside temperature data
+1. Aggregation of the inside temperature data, outside temperature data, and ease of expansion in the future
 1. Error handling if one of the services was not available
 
-The first order of business was to reprogram the ESP8266 to just gather the temperature and allow something else to access the data. I opted to use HTTP for this task, namely because then I could also ask the sensor for the current temperature. This was the end result that I came up with. A simple HTTP server that runs on the ESP8266 and checks the temperature about every 10 seconds or so. By using this type of interval I can ensure that the MCU isn't overwhelmed by having to constantly be talking to the temperature sensor.
+The first order of business was to reprogram the ESP8266 to just gather the temperature and allow something else to access the data. I opted to use HTTP for this task, it's fairly simple to implement and there is the added benefit that I could access the data from the node directly by using a web browser.  
+
+My end product, after several iterations was a simple HTTP server that runs on the ESP8266 and checks the temperature about every 10 seconds or so. By using this type of interval I can ensure that the MCU isn't overwhelmed by constant communication with the temperature sensor, and at worst I get a temperature value that is 10 seconds old.
 
 <script src="https://gist.github.com/adamrunner/700dda463f25ab56b97b.js"></script>
 
-This gives me a very simple API to interact with.
+This gives me a very simple HTTP API to interact with, and I can even use the web browser on my computer or phone to check the current temperature.
 
 ~~~
 curl -XGET http://192.168.1.110
@@ -61,7 +65,7 @@ For this script I ended up with a fairly simple solution, though not elegant. I 
 
 ### Do.. something with this data
 
-If you've seen the [about me](/aboutme) page, you'll have a leg up on this section. I decided that an excellent way to represent the temperature data that I had been gathering was through a line graph. I settled on using the [Google Chart Javascript Library](https://developers.google.com/chart/) as it seemed to be fairly easy to work with. I have used [D3.js](https://d3js.org/) and also [HighCharts](http://www.highcharts.com/) so it was nice to check out another charting library.
+If you've seen the [about me](/aboutme) page, you'll have a leg up on this section. I decided that an excellent way to represent the temperature data that I had been gathering was through a line graph. I settled on using the [Google Chart Javascript Library](https://developers.google.com/chart/) as it seemed to be fairly easy to work with. I have used [D3.js](https://d3js.org/) and also [HighCharts](http://www.highcharts.com/) so it was nice to check out another charting library. In retrospect Google Charts was an excellent decision for this project.
 
 The implementation of Google Charts was basically painless
 
@@ -70,14 +74,14 @@ The implementation of Google Charts was basically painless
 1. Create a new chart, and pass in a reference to the DOM element where I wanted the chart rendered
 1. Tell it to render the chart, and then done.
 
-If you want to see the source code for the Google Chart implementation, check the [about me](/aboutme) page or [this Gist](https://gist.github.com/adamrunner/8221a232ac68bae90f48).
+If you want to see the source code for the Google Chart implementation, check source of the [about me](/aboutme) page or [this Gist](https://gist.github.com/adamrunner/8221a232ac68bae90f48).
 
 ### Future Plans
 
-1. Implement some date or filtering controls so I can use the chart for historical reporting, currently it just pulls the last "page" of data from the SparkFun API.
+1. Implement some date or filtering controls so I can use the chart for historical reporting, currently it just pulls the last "page" of data from the SparkFun API, this usually gives me a couple days worth of data; but it's not filterable.
 1. Switch to using ElasticSearch to pull the data from. ElasticSearch is a powerful search index which could allow all sorts of fun things with the data.
 1. Build an iOS app to pull the data directly from the sensor to my phone, in a widget.
-1. Enhance the Ruby component of the application, so it's more resilient to failures. Currently if there is a problem it fails silently, and the execution of the script is not retried. Moving to a job queue could possibly solve this issue, but feels a little heavy weight.
+1. Enhance the Ruby component of the application, so it's more resilient to failures. Currently if there is a problem it fails silently, and the execution of the script is not retried. Moving to a job queue could possibly solve this issue, but feels more complex than is needed.
 1. Build a JavaScript application to interact with the ElasticSearch API to give us an interface for reading and working with the data.
 
 Thanks for reading, and happy building!
