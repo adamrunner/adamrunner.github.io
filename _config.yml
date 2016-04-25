@@ -9,7 +9,7 @@ baseurl: ""
 
 # Name of website
 title: Building Internet Things
-
+navlink: '/index.html'
 # Short description of your site
 description: I build things for the internet, usally software. Sometimes I play with hardware and components too.
 gems: [jekyll-paginate]
@@ -21,7 +21,7 @@ avatar: "/img/headshot.jpg"
 
 # List of links in the navigation bar
 navbar-links:
-  Home: "index"
+  Home: "index.html"
   About Me: "aboutme"
 
 # --- Footer options --- #
@@ -98,6 +98,7 @@ prose:
     - LICENSE
     - feed.xml
     - _config.yml
+    - dist
     - /_layouts
     - /_includes
     - /css

@@ -1,0 +1,3 @@
+#! /bin/bash
+jekyll build
+rsync -avz ./_site/ bangarang:/home/deploy/adamrunner.com --delete-after
