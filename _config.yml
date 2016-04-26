@@ -10,6 +10,7 @@ baseurl: ""
 # Name of website
 title: Adam Runner - Building Things For The Internet
 navlink: '/index.html'
+navlink_text: Adam's Internet Blog
 # Short description of your site
 description: I build things for the internet, usally software. Sometimes I play with hardware and components too.
 gems: [jekyll-paginate]
