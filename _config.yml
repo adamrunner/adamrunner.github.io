@@ -13,7 +13,7 @@ navlink: '/index.html'
 navlink_text: Adam's Internet Blog
 # Short description of your site
 description: I build things for the internet, usally software. Sometimes I play with hardware and components too.
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, jekyll-coffeescript]
 # --- Navigation bar options --- #
 
 # Image to show in the navigation bar - image must be a square (width = height)
@@ -24,6 +24,7 @@ avatar: "/img/headshot.jpg"
 navbar-links:
   Home: "index.html"
   About Me: "aboutme"
+  Temperature Graph: "temp_graph"
 
 # --- Footer options --- #
 
