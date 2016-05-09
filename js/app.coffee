@@ -1,5 +1,10 @@
 ---
 ---
+# Doc Ready
+$ ->
+  drawChart()
+  $('#go').click drawChart
+
 Highcharts.setOptions(
   global:
     useUTC: false
@@ -8,8 +13,30 @@ Highcharts.setOptions(
       marker:
         enabled: false
 )
+
 $("#from").val(moment().format('YYYY-MM-DD'))
 $("#to").val(moment().add(1, 'days').format('YYYY-MM-DD'))
+
+$('#yesterday').click (event) ->
+  $("#from").val(moment().subtract(1, 'days').format('YYYY-MM-DD'))
+  $("#to").val(moment().format('YYYY-MM-DD'))
+  drawChart()
+
+$('#today').click (event) ->
+  $("#from").val(moment().format('YYYY-MM-DD'))
+  $("#to").val(moment().add(1, 'days').format('YYYY-MM-DD'))
+  drawChart()
+$('#minus-one-day').click (event) ->
+  backDate = moment($("#from").val()).subtract(1, 'days').format('YYYY-MM-DD')
+  $("#from").val(backDate)
+  $("#to").val(moment(backDate).add(1, 'days').format('YYYY-MM-DD'))
+  drawChart()
+$('#add-one-day').click (event) ->
+  addDate = moment($("#from").val()).add(1, 'days').format('YYYY-MM-DD')
+  $("#from").val(addDate)
+  $("#to").val(moment(addDate).add(1, 'days').format('YYYY-MM-DD'))
+  drawChart()
+
 window.client = new $.es.Client(
   host: [
     'https://es.adamrunner.com'
@@ -39,7 +66,7 @@ drawChart = ->
   timestamp['gte'] = from if from
   results = client.search(window.search_query)
   results.then (results) ->
-    $("#result-text ul").html("<li> total count: #{results.hits.total} </li><li> current count: #{results.hits.hits.length} </li>")
+    $("#result-text ul").html("<li>Total Results: #{results.hits.total} </li><li>Displayed Results: #{results.hits.hits.length} </li>")
     window.outside_data = results.hits.hits.map (o) ->
       [moment(o._source.timestamp).valueOf(), o._source.outside_temp ]
     window.inside_data = results.hits.hits.map (o) ->
@@ -70,6 +97,3 @@ drawChart = ->
         data: kitchen_data
       ]
     )
-$ ->
-  drawChart()
-$('#go').click drawChart
