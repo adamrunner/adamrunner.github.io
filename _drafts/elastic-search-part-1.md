@@ -3,7 +3,7 @@ layout: post
 title: Installing ElasticSearch on Ubuntu 14.04 Server (part 1)
 ---
 
-This is going to be the first part in a multi-part series about ElasticSearch, I've recently started using it and researching it on some projects and I've been very interested so far. Just this fact alone seemed to make it a good candidate for a blog post.
+This is going to be the first part in a multi-part series about ElasticSearch, I've recently started using it and researching it on some projects and I've been very interested so far. Just this fact alone seemed to make it a good candidate for a blog post. This first post is mainly about setting up the environment, if you'd like to skip ahead to the meat of the ElasticSearch stuff, [I've got a post for that](/2016-05-20-elastic-search-part-2).
 
 ### Installing ElasticSearch
 
@@ -43,7 +43,7 @@ You'll want to copy your *public* SSH key and paste it into the box. Give it a n
 
 ~~~
 cat ~/.ssh/id_rsa.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZLgtRur7QWFTFoMzSKS9GHJ5vdXDcpTOOy2FsIXMYO8F29aot5eYJz2pTrZsBhrKLrq8kzkck9rGXHi8p5r//kZ7FLhj5nglI7DXaaBBnFdJ+ilklt+1WSzhAZngcs0+NKv64Kt92BfPXnM+AIqQDaMXBdHTevUQ39h9No0WYNd902e1hyZkn6zURvz3U1oMuqX7lQceF7pQtRdkFiCxKzPP5MLpMAqQXWXmt5RgxygYfOWDUbIcTRapb7IZDQ5SCQGvBZ59cq+n9 someone@example.com
+ssh-rsa BB3NzaC1yRur7QWFTFoMzSKc2EAAAADAQABAAABAQCZLgtS9GHJ5vdXDcpTOOy2FsIXMYO8F29aot5eYJz2pTrZsBhrKLrq8kzkck9rGXHi8p5r//kZ7FLhj5nglI7DXaaBBn7lQceF7pQtRdkFiCxKzPFdJ+ilklt+1WSzhAZngcs0+NKv64Kt92BfPXnM+AIqQDaMXBdHTevUQ39h9No0WYNd902e1hyZkn6zURvz3U1oMuqXP5MLpMAqQXWXmt5RgxygYfOWDUbIcTRapb7IZDQ5SCQGvBZ59cq+n9 someone@example.com
 ~~~
 
 Choose a hostname: This hostname is (I believe) just for your machine locally / on your account. You should just be able to put whatever you want here.

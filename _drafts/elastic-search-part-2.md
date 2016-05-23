@@ -3,7 +3,7 @@ layout: post
 title: Installing ElasticSearch on Ubuntu 14.04 Server (part 2)
 ---
 
-[In my last post](/2016-03-24-elastic-search-part-1) we got our environment all setup and running at DigitalOcean, or you setup your own server however you'd like. Regardless, I'm assuming that you have SSH access to your server currently.
+[In my last post](/2016-03-24-elastic-search-part-1) we got our environment all setup and running at DigitalOcean, or you setup your own server however you'd like. Regardless, I'm assuming that you have SSH access to your server currently. We're going to go over some best practices for servers, and also configuration and installation of ElasticSearch.
 
 ### Lock it down.
 The first thing we're going to need to do is change some of the defaults for how the Ubuntu server is configured. When you spin up a droplet at DigitalOcean with an SSH key, there is only 1 user on the machine and it's the root account. We want to create a normal user and add `sudo` privileges for that user.
