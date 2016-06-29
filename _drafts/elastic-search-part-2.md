@@ -5,32 +5,6 @@ title: Installing ElasticSearch on Ubuntu 14.04 Server (part 2)
 
 [In my last post](/2016-03-24-elastic-search-part-1) we got our environment all setup and running at DigitalOcean, or you setup your own server however you'd like. Regardless, I'm assuming that you have SSH access to your server currently. We're going to go over some best practices for servers, and also configuration and installation of ElasticSearch.
 
-### Lock it down.
-The first thing we're going to need to do is change some of the defaults for how the Ubuntu server is configured. When you spin up a droplet at DigitalOcean with an SSH key, there is only 1 user on the machine and it's the root account. We want to create a normal user and add `sudo` privileges for that user.
-
-First we'll connect to our server as root. Using this command `ssh root@my_server_ip`. Since we've already supplied our public key to the server, there shouldn't be any other credentials needed to log in.
-
-After this we'll want to create a new normal user, and then add it to the "sudo" group. Allowing the account to perform privileged actions with a password. We'll also copy the `authorized_keys` file from the `root` user, so we don't have to mess with any pesky passwords. We'll fix the owner on the file, and then lastly we'll set a password for our user, this password will be the one that we're prompted for when running `sudo` actions.
-You'll need to replace `your_user_name` with whatever username you want to use. If you don't know your droplet's IP address you can check in your [DigitalOcean control panel](https://cloud.digitalocean.com/droplets).
-
-~~~
-$ ssh root@my_server_ip
-root@ubuntu:~# adduser your_user_name
-...
-root@ubuntu:~# adduser your_user_name sudo
-root@ubuntu:~# mkdir -p /home/your_user_name/.ssh/
-root@ubuntu:~# cp ~/.ssh/authorized_keys /home/your_user_name/.ssh/
-root@ubuntu:~# chown your_user_name:your_user_name -R /home/your_user_name/.ssh
-root@ubuntu:~# passwd your_user_name
-root@ubuntu:~# exit
-~~~
-
-There are several more "hardening" steps that you can take at this point. I usually do this:
-
-1. Edit the file `/etc/ssh/sshd_config` change `PasswordAuthentication yes` to `PasswordAuthentication no`. This will require that you authenticate via public keys. You'll still need to use your password for `sudo`
-1. Also in `/etc/ssh/sshd_config` you can adjust the port that SSH is listening on, this will help prevent some brute force attacks. But it's also annoying to remember a non-default port.
-1. Install `fail2ban`, an authentication log parser / IP address banner. It scans the log files that SSH uses and then uses IP Tables to ban IP addresses that are spamming your server with failed logins. `sudo apt-get install fail2ban` the default configuration will ban an IP for 5 minutes after failing to login 3 times in a 3 minute period.
-
 ### Installing dependencies for ElasticSearch
 ElasticSearch runs on Java, and Ubuntu doesn't ship with Java installed. So we'll need to fix that, the version of Java I'm using is Oracle Java 8 JDK. It's the latest stable version at the time of this writing. To install it via a repository we'll have to add the PPA for Java (provided by the [webupd8team](http://www.webupd8.org/)) to Ubuntu.
 

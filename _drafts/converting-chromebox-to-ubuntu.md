@@ -3,13 +3,14 @@ layout: post
 title: Converting an HP Chromebox to run Ubuntu 14.04
 ---
 
-**NOTE:** Standard Disclaimer, and yada yada, this works fine for me. But could totally brick your Chromebox. So you know there's that.
+**NOTE:** Standard Disclaimer, and yada yada, this works fine for me. But could totally brick your Chromebox. So you know there's that, and uh I'm not responsible for your new Chromebrick if something goes wrong. 
 
 ### Things you'll need to get started
 1. ChromeBox, keyboard, mouse, monitor, internet connection
 1. USB Flash Drive >= 4GB
 1. Phillips Head Screwdriver
 1. Flat Screwdriver
+1. Paper Clip / Something small to press the recessed reset button
 
 
 1. Disable Write Protect - Remove Internal Screw
