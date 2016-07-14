@@ -18,5 +18,4 @@ Cover asset pipeline in Sinatra
 
 Settings, and examples and how to use things like Haml Coffee
 
-Use the Sinatra AssetPipeline Gem - which simplifies much of the implementation of the asset pipeline. 
-
+Use the [Sinatra AssetPipeline Gem](https://github.com/kalasjocke/sinatra-asset-pipeline) - which simplifies much of the implementation of the asset pipeline. 
