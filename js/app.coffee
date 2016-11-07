@@ -46,22 +46,15 @@ window.client = new $.es.Client(
 window.search_query =
   'index': 'temperature'
   'body':
-    'sort':
-      'timestamp' : 'asc'
-    'query':
-      'bool':
-        'must':
-          'match_all': {}
-          'filter':
-            'range':
-              'timestamp': {}
+    'sort': 'timestamp': 'asc'
+    'filter': 'range': 'timestamp': {}
 
 
 drawChart = ->
   window.search_query['size'] = parseInt($("#per_page").val())
   from    = moment($('#from').val()).format()
   to      = moment($('#to').val()).format()
-  timestamp = window.search_query['body']['query']['bool']['must']['filter']['range']['timestamp']
+  timestamp = window.search_query['body']['filter']['range']['timestamp']
   timestamp['lte'] = to if to
   timestamp['gte'] = from if from
   results = client.search(window.search_query)
