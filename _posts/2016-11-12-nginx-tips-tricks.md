@@ -23,7 +23,7 @@ location @robots_txt { return 200 "User-agent: * \nDisallow: /\n"; }
 
 This is a good practice to get in the habit of, forcing your users to a specific URL of your site - either `www.adamrunner.com` or `adamrunner.com`. I preferred `adamrunner.com` for the URL of my website. This small server block will redirect any visitors from the `www` to the non-www version. A prerequisite for this is that you have the appropriate `A` or `AAAA` records defined with your hosting provider.
 
-If you would prefer the `www` version of your URL, you'll just want to switch them in the example below. This code listens on `www.adamrunner.com` and redirects it to `adamrunner.com`. It uses a 301 redirect, which is a "permament" redirect.
+If you would prefer the `www` version of your URL, you'll just want to switch them in the example below. This code listens on `www.adamrunner.com` and redirects it to `adamrunner.com`. It uses a 301 redirect, which is a "permanent" redirect.
 
 ~~~nginx
 server {
@@ -35,6 +35,45 @@ server {
 ~~~
 
 <hr>
+
+#### How to Use Basic Authentication in Nginx
+
+If you're serving up a resource that you want to limit the access to, one of the easiest ways is to use basic authentication. As the name implies, it's very __basic__. It's also very quick and easy to get up and running.
+
+It's worth noting that you **should** use Basic Authentication in conjunction with HTTPS; otherwise your passwords will be submitted in plain-text to the web server, and that is a Very Bad Thing ™.
+
+~~~nginx
+location /restricted {
+  satisfy any;
+  deny all;
+  auth_basic "Restricted"; # Just the title of the dialog box that pops up, you can make this more descriptive.
+  auth_basic_user_file /etc/nginx/.htpasswd; # You'll need to generate this file, I'll show you how.
+  # These two lines are optional, but I'd recommend logging any access to your restricted URL.
+  access_log /var/log/nginx/restricted.log;
+  error_log /var/log/nginx/restricted-error.log;
+}
+~~~
+
+Before this will work, you'll need to generate a `.htaccess` file that contains the username and encrypted password that you would like to use.
+
+~~~shell
+cd ~
+printf "MYUSERNAME:$(openssl passwd -crypt MYPASSWORD)\n" >> .htpasswd
+sudo mv .htpasswd /etc/nginx/
+sudo chmod 444 /etc/nginx/.htpasswd
+~~~
+
+These commands will generate an encrypted version of the password `MYPASSWORD`, it then outputs it to the `.htpasswd` file (along with the username `MYUSERNAME`).
+It also appends it to the `.htpasswd` file, allowing you to append different credentials in there if you would like.
+
+Lastly, we move the file to `/etc/nginx/.htpasswd` (which is the location specified in our Nginx configuration block) - and then `chmod` the file so it can only be read, and not written to.
+
+After restarting Nginx `sudo service nginx restart` when you attempt to access the restricted URL in your browser, you'll end up with an authentication prompt.
+
+<img src="/img/nginx_basic_authentication.png" class="img-thumbnail center-block" width="392px"/>
+
+<hr>
+
 
 #### How To Redirect HTTP to HTTPS
 
