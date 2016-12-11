@@ -1,3 +1,3 @@
 #! /bin/bash
 jekyll build
-rsync -avz ./_site/ adamrunner@es.adamrunner.com:/home/adamrunner/adamrunner.com --delete-after
+rsync -avz ./_site/ adamrunner@es.adamrunner.com:/home/adamrunner/adamrunner.com --exclude-from=upload_exclude.txt --delete-after
