@@ -24,7 +24,7 @@ avatar: "/img/headshot.jpg"
 navbar-links:
   Home: "index.html"
   About Me: "aboutme"
-  Temperature Graph: "temp_graph"
+  Temperature Graph: "https://temp.adamrunner.com"
 
 # --- Footer options --- #
 
