@@ -29,6 +29,10 @@ a:hover,
 a:focus {
   color: #0085a1;
 }
+
+.m-0-auto {
+  margin: 0 auto;
+}
 blockquote {
   color: #808080;
   font-style: italic;
