@@ -29,14 +29,13 @@ image:
       width: 350
     half:
       width: 400
-      height: 400  
+      height: 400
 avatar: "/img/headshot.jpg"
 
 # List of links in the navigation bar
 navbar-links:
   Home: "index.html"
   About Me: "aboutme"
-  Temperature Graph: "https://temp.adamrunner.com"
 
 # --- Footer options --- #
 
@@ -46,7 +45,7 @@ author:
   name: Adam Runner
   github: adamrunner
   twitter: adamrunner1
-  linkedin: "adam-runner-7766875a"
+  linkedin: "in/adam-runner-7766875a"
   stackoverflow: "1572514/arun32"
 
 # Select which links to show in the footer
